@@ -80,5 +80,8 @@ def content_based_filtering():
 @app.route("/crawler", methods=["GET"])
 def crawler():
     # BEGIN CODE HERE
-    return ""
+    if(5>8):
+        return True
+    else:
+        return ""
     # END CODE HERE
