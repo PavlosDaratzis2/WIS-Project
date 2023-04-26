@@ -9,6 +9,104 @@
   </head>
   <body>
     <!-- BEGIN CODE HERE -->
+    <header>
+      <div class="container mt-5 px-0 ">
+        <img src="logo.png" alt="LogoCsd" width="250px" height="58px">
+        <div class="rounded float-end">
+          <!-- <button type="button" class="btn btn-primary">Home</button> -->
+          <a href="homepage.html" type="button" class="btn btn-white">Home</a>
+
+          <!-- <button type="button" class="btn btn-white">Product</button> -->
+          <a href="#" class="btn btn-primary">Product</a>
+        </div>
+      </div>
+   </header>
+
+
+   <main>
+  <div class="frame 4">
+    <div class="container">
+			<div class="input-group row mt-4">
+        <label for="inputLabel" class="col-form-label col-auto ">Search a product:</label>
+        <div class="col-md-3">
+          <div class="input-group">
+             <input type="text" class="form-control" placeholder="Input">
+            <div class="input-group-append">
+              <button class="btn btn-block rounded-0 btn-primary">Search</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+
+        Results:</br>
+        <table class="table table-hover table-striped">
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Production year</th>
+            <th>Price</th>
+            <th>Color</th>
+            <th>Size</th>
+          </tr><tr>
+            <td>3648</td>
+            <td>Elias</td>
+            <td>1999</td>
+            <td>100000</td>
+            <td>Red</td>
+            <td>189</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+     <div class="frame 5">
+       <div class="container">
+			   </br>
+			   <h4>Add a product:</h4></br>
+			  <form>
+				  <div class="form-group row divclass ">
+					  <label for="name" class="col-sm-2 col-form-label labelclass" style="text-align:center;">Name:</label>
+					    <div class="col-sm-2">
+						      <input type="name" class="form-control" id="name" placeholder="input">
+					    </div>
+				  </div>
+				  <div class="form-group row divclass mt-1">
+					  <label for="year" class="col-sm-2 col-form-label" style="text-align:center;">Production Year:</label>
+					<div class="col-sm-2">
+						<input type="year" class="form-control" id="year" placeholder="input">
+					</div>
+				</div>
+				<div class="form-group row divclass mt-1">
+					<label for="price" class="col-sm-2 col-form-label" style="text-align:center;">Price:</label>
+					<div class="col-sm-2">
+						<input type="price" class="form-control" id="inputEmail3" placeholder="input">
+					</div>
+				</div>
+				<div class="form-group row divclass mt-1">
+					<label for="fcolor" class="col-sm-2 col-form-label" style="text-align:center;">Color:</label>
+					<div class="col-sm-2">
+						<input type="fcolor" class="form-control" id="fcolor" placeholder="input">
+					</div>
+				</div>
+				<div class="form-group row divclass mt-1">
+					<label for="size" class="col-sm-2 col-form-label" style="text-align:center;">Size:</label>
+					<div class="col-sm-2">
+						<input type="size" class="form-control" id="size" placeholder="input">
+					</div>
+				</div>
+		 </form>
+			
+		<button type="button" class="btn btn-primary position-sticky" style="left: 100%;">Save</button>
+	</div>
+</div>
+</main>
+  
+<footer>
+    <footer class="d-flex align-items-center justify-content-center" style="height: 100px">
+      <p class="text-center">ΕΥΘΥΜΙΟΥ ΗΛΙΑΣ-3648</p>
+  </footer> 
 
     <!-- END CODE HERE -->
     <script src="products.js"></script>

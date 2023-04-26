@@ -1,3 +1,50 @@
 /* BEGIN CODE HERE */
-
-/* END CODE HERE */
+header{
+    height: 150px;
+    min-width: 1200px;
+    max-height: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    display: flex;
+  }
+  
+  .custom-container {
+    width: 1200px;
+    height: 400px;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    background-color: rgb(228, 111, 111);
+    border: 3px solid black;
+  }
+  
+   .container{
+    max-width: 1200px !important;
+    width: 100%;
+    margin: 0 auto;
+    min-width: 1200px;
+    padding: 0;
+    margin-top: 25px;
+  } 
+  button.frame5{
+    justify-content: right !important;
+  }
+  
+  
+  table, tr td,tr th {
+    border: 1px solid;
+    text-align: center;
+  }
+  
+  table{
+    font-family: arial, sans-serif;
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  
+  
+  
+    
+  /* END CODE HERE */
