@@ -23,6 +23,7 @@ def search():
     
     if not search_text:
         return jsonify([])
+    
 
     results = mongo.db.products.find({"name": {"$regex": search_text, "$options": "i"}}).sort('price')
 
@@ -30,17 +31,19 @@ def search():
 
     for result in results:
         response.append({
-            'id':(result['id']),
+            'id':result['id'],
             'name': result['name'],
             'production_year': result['production_year'],
             'price': result['price'],
             'color': result['color'],
             'size': result['size']
         })
+    
+    
 
     response.reverse()
-
-    return jsonify(response)
+    json_string = json.dumps(response, sort_keys=False)
+    return json_string
 
      # END CODE HERE
 
