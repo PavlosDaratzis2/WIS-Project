@@ -51,16 +51,35 @@ def search():
 @app.route("/add-product", methods=["POST"])
 def add_product():
     # BEGIN CODE HERE
-    new_person = {}
-    new_person["id"] = request.args.get('id')
-    new_person["name"] = request.args.get('name')
-    new_person["production_year"] = request.args.get('production_year')
-    new_person["price"] = request.args.get('price')
-    new_person["color"] = request.args.get('color')
-    new_person["size"] = request.args.get('size')
-    print(new_person)
+    # new_person = {}
+    # new_person["id"] = request.args.get('id')
+    # new_person["name"] = request.args.get('name')
+    # new_person["production_year"] = request.args.get('production_year')
+    # new_person["price"] = request.args.get('price')
+    # new_person["color"] = request.args.get('color')
+    # new_person["size"] = request.args.get('size')
+    # print(new_person[id])
+    # # print(new_person[id])
+    # # print(new_person[id])
+    # # print(new_person[id])
+    # # print(new_person[id])
     
-    # the find One returns the first document that matches your query criteria or null
+    # # the find One returns the first document that matches your query criteria or null
+    # exists = mongo.db.products.find_one({"name": new_person["name"]})
+    # if exists is None:
+    #     mongo.db.products.insert_one(new_person)
+    #     return "Addition Made"
+    # else:
+    #     mongo.db.products.update_one({"name": new_person["name"]}, {"$set": {"id": new_person["id"],"production_year": new_person["production_year"],"price": new_person["price"],"color": new_person["color"],"size": new_person["size"]}})
+    # return "Update Made"
+
+  
+    # Get JSON data from the POST request
+    new_person = request.get_json()
+
+    # Check if data is received correctly
+    print(new_person)
+
     exists = mongo.db.products.find_one({"name": new_person["name"]})
     if exists is None:
         mongo.db.products.insert_one(new_person)
@@ -69,6 +88,7 @@ def add_product():
         mongo.db.products.update_one({"name": new_person["name"]}, {"$set": {"id": new_person["id"],"production_year": new_person["production_year"],"price": new_person["price"],"color": new_person["color"],"size": new_person["size"]}})
     return "Update Made"
 
+    
 
     # END CODE HERE
 
