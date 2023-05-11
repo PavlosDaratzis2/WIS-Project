@@ -43,25 +43,31 @@ def search():
 @app.route("/add-product", methods=["POST"])
 def add_product():
     # BEGIN CODE HERE
-    new_person = {}
-    new_person["name"] = request.args.get('name')
-    new_person["production_year"] = int(request.args.get('production_year'))
-    new_person["price"] = float(request.args.get('price'))
-    new_person["color"] = int(request.args.get('color'))
-    new_person["size"] = int(request.args.get('size'))
+    data = None
 
-
-    # the find_one returns the first document that matches your query criteria or None
-    exists = mongo.db.products.find_one({"name": new_person["name"]})
-    if exists is None:
-        mongo.db.products.insert_one(new_person)
-        return "Addition Made"
+    if request.headers.get('Content-Type') == 'application/json':
+        data = request.get_json()
     else:
-        mongo.db.products.update_one({"name": new_person["name"]}, {
-            "$set": {"production_year": new_person["production_year"],
-                     "price": new_person["price"], "color": new_person["color"], "size": new_person["size"]}})
-        return "Update Made"
+        data = request.args.to_dict()
 
+    if data is None:
+        return "Invalid data", 400
+
+    # Access data as dictionary
+    new_product = {}
+    new_product["name"] = data.get('name')
+    new_product["production_year"] = int(data.get('production_year'))
+    new_product["price"] = int(data.get('price'))
+    new_product["color"] = int(data.get('color'))
+    new_product["size"] = int(data.get('size'))
+
+    exists = mongo.db.products.find_one({"name": new_product["name"]})
+    if exists is None:
+        mongo.db.products.insert_one(new_product)
+        return "OK"
+    else:
+        mongo.db.products.update_one({"name": new_product["name"]}, {"$set": {"production_year": new_product["production_year"],"price": new_product["price"],"color": new_product["color"],"size": new_product["size"]}})
+        return "Update Made"
 
     # END CODE HERE
 

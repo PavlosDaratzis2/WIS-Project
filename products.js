@@ -5,6 +5,8 @@ window.onload = () => {
     const saveButton = document.getElementById("postReq");
     saveButton.onclick = productFormOnSubmit;
 
+
+
     // END CODE HERE
 }
 
@@ -16,10 +18,8 @@ searchButtonOnClick = () => {
 
 productFormOnSubmit = (event) => {
     // BEGIN CODE HERE
-
     const res = new XMLHttpRequest();
-
-    // Set up the onreadystatechange event handler
+    res.open("POST", `http://127.0.0.1:5000/add-product`);
     res.onreadystatechange = () => {
         if (res.readyState == 4) {
             if (res.status == 200) {
@@ -27,25 +27,16 @@ productFormOnSubmit = (event) => {
             }
         }
     };
-
-    // Open the request
-    res.open("POST", `http://127.0.0.1:5000/add-product`, true);
-
-    // Set request header
-    res.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-
-    const productData = JSON.stringify({
-        "id": "90",
-        "name": "Paper 80",
-        "production_year": 2030,
-        "price": 50,
+     // same for the project
+    res.setRequestHeader("Content-Type", "application/json");
+    res.send(JSON.stringify({
+        "name":"Paper A10",
+        "production_year":2010,
+        "price": 10,
         "color": 1,
-        "size": 1
-    });
+        "size": 2
+    }))
 
-    console.log("Sending JSON data:", productData);
 
-    // Send the request
-    res.send(productData);
     // END CODE HERE
 }
