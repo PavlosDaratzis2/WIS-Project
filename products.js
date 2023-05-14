@@ -2,6 +2,8 @@ const api = "http://127.0.0.1:5000";
 
 window.onload = () => {
     // BEGIN CODE HERE
+    const searchButton = document.getElementById("getSearch");
+    searchButton.onclick = searchButtonOnClick;
     const saveButton = document.getElementById("postReq");
     saveButton.onclick = productFormOnSubmit;
 
@@ -12,7 +14,51 @@ window.onload = () => {
 
 searchButtonOnClick = () => {
     // BEGIN CODE HERE
+    const getProduct = document.getElementById("inputProduct");
+    // alert(getProduct.value);
+    const res = new XMLHttpRequest();
+    res.open("GET", `${api}/search?name=${getProduct.value}`);
+    res.onreadystatechange = () => {
+        if (res.readyState == 4) {
+            if (res.status == 200) {
+                // console.log(res.responseText);
+                const resultsDiv = document.getElementById("results");
+                resultsDiv.innerHTML = "";
+                const tableId = document.createElement("td");
+                const tableName = document.createElement("td");
+                const tableYear = document.createElement("td");
+                const tablePrice = document.createElement("td");
+                const tableColor = document.createElement("td");
+                const tableSize = document.createElement("td");
 
+                const resText = JSON.parse(res.responseText);
+                
+                tableId.innerHTML = `${resText.id}`;
+                tableName.innerHTML = `${resText.name}`;
+                tableYear.innerHTML = `${resText.production_year}`;
+                tablePrice.innerHTML = `${resText.price}`;
+                tableColor.innerHTML = `${resText.color}`;
+                tableSize.innerHTML = `${resText.size}`;
+                resultsDiv.appendChild(tableId);
+                resultsDiv.appendChild(tableName);
+                resultsDiv.appendChild(tableYear);
+                resultsDiv.appendChild(tablePrice);
+                resultsDiv.appendChild(tableColor);
+                resultsDiv.appendChild(tableSize);
+                // const date = document.createElement("div");
+                // const resText = JSON.parse(res.responseText);
+                // const datetime = {date: resText.datetime.split("T")[0], time: resText.datetime.split("T")[1]};
+                // datetime.date = {day: datetime.date.split("-")[2], month: datetime.date.split("-")[1], year: datetime.date.split("-")[0]};
+                // datetime.time = {hour: datetime.time.split(":")[0], minute: datetime.time.split(":")[1]}
+                // date.innerHTML = `${datetime.date.day}/${datetime.date.month}/${datetime.date.year}`;
+                // resultsDiv.appendChild(date);
+                // const time = document.createElement("div");
+                // time.innerHTML = `${datetime.time.hour}:${datetime.time.minute}`
+                // resultsDiv.appendChild(time);
+            }
+        }
+    };
+    res.send();
     // END CODE HERE
 }
 
