@@ -60,7 +60,7 @@
       <div class="container px-0 container-frame5">
         </br>
         <h4>Add a product:</h4></br>
-       <form onsubmit="productFormOnSubmit(event)">
+       <form>
          <div class="form-group row divclass ">
            <label for="name" class="col-sm-2 col-form-label labelclass" style="text-align:center;">Name:</label>
              <div class="col-sm-2 col-auto">
@@ -76,7 +76,7 @@
        <div class="form-group row divclass mt-1">
          <label for="price" class="col-sm-2  col-form-label" style="text-align:center;">Price:</label>
          <div class="col-sm-2 col-auto">
-           <input type="price" class="form-control" id="inputEmail3" placeholder="input">
+           <input type="price" class="form-control" id="price" placeholder="input">
          </div>
        </div>
        <div class="form-group row divclass mt-1">
@@ -91,7 +91,7 @@
            <input type="size" class="form-control" id="size" placeholder="input">
          </div>
        </div>
-     <button type="submit" class="btn btn-primary position-sticky" style="left: 100%;" id="postReq">Save</button>
+     <button type="submit" class="btn btn-primary position-sticky" style="left: 100%;" id="postReq" onclick="productFormOnSubmit(event)">Save</button>
     </form>
      
 <!--   <button type="submit" class="btn btn-primary position-sticky" style="left: 100%;" id="postReq">Save</button>-->
