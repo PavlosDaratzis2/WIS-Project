@@ -82,8 +82,32 @@ def content_based_filtering():
 @app.route("/crawler", methods=["GET"])
 def crawler():
     # BEGIN CODE HERE
-    if(5>8):
-        return True
-    else:
-        return ""
+    semester = int(request.args.get('semester'))
+
+    options = Options()
+    options.headless = True
+    driver = webdriver.Chrome(options=options)
+
+    driver.get("https://qa.auth.gr/el/x/studyguide/600000438/current")
+
+    res = []
+    try:
+        # Εύρεση των μαθημάτων για το συγκεκριμένο εξάμηνο με τη σωστή τάξη ή id
+        table_id = "exam" + str(semester)  # Δημιουργία του σωστού id του πίνακα βάσει του εξαμήνου
+        table = driver.find_element(By.ID, table_id)  # Εύρεση του πίνακα με το σωστό id
+        rows = table.find_elements(By.TAG_NAME, "tr")[1:]  # Εύρεση όλων των γραμμών του πίνακα εκτός από την πρώτη
+
+        for row in rows:
+            # Εύρεση του ονόματος του μαθήματος, εάν υπάρχει
+            title_elements = row.find_elements(By.CLASS_NAME, "title")  # it returns list
+            if title_elements:  # Ελέγχει αν το list δεν είναι άδειο
+                title = title_elements[0].text  # Χρησιμοποιεί την ιδιότητα 'text'
+                if title:
+                    res.append(title)
+    except Exception as e:
+        print(str(e))
+
+
+    driver.quit()
+    return jsonify(res), 200
     # END CODE HERE
