@@ -70,8 +70,43 @@ searchButtonOnClick = () => {
                     tableName.innerHTML = `${item.name}`;
                     tableYear.innerHTML = `${item.production_year}`;
                     tablePrice.innerHTML = `${item.price}`;
-                    tableColor.innerHTML = `${item.color}`;
-                    tableSize.innerHTML = `${item.size}`;
+//                    tableColor.innerHTML = `${item.color}`;
+                    // Translate the color code to color name
+        switch (item.color) {
+            case 1:
+                tableColor.innerHTML = "Red";
+                break;
+            case 2:
+                tableColor.innerHTML = "Yellow";
+                break;
+            case 3:
+                tableColor.innerHTML = "Blue";
+                break;
+            default:
+                tableColor.innerHTML = `${item.color}`;
+                break;
+        }
+        switch (item.size) {
+            case 1:
+                tableSize.innerHTML = "small";
+                break;
+            case 2:
+                tableSize.innerHTML = "medium";
+                break;
+            case 3:
+                tableSize.innerHTML = "large";
+                break;
+            case 4:
+//                tableSize.innerHTML = "extra large";
+                  tableSize.innerHTML = "extra&nbsp;large";
+
+                break;
+            default:
+               tableSize.innerHTML = `${item.size}`;
+               break;
+             }
+
+//                    tableSize.innerHTML = `${item.size}`;
 
                     // Append each table data element to the row
                     row.appendChild(tableId);
