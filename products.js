@@ -6,71 +6,104 @@ window.onload = () => {
     searchButton.onclick = searchButtonOnClick;
     const saveButton = document.getElementById("postReq");
     saveButton.onclick = productFormOnSubmit;
-
-
+//    const searchInput = document.getElementById("inputProduct");
 
     // END CODE HERE
-}
+ }
 
 searchButtonOnClick = () => {
     // BEGIN CODE HERE
     const getProduct = document.getElementById("inputProduct");
-    // alert(getProduct.value);
     const res = new XMLHttpRequest();
     res.open("GET", `${api}/search?name=${getProduct.value}`);
     res.onreadystatechange = () => {
         if (res.readyState == 4) {
             if (res.status == 200) {
-                // console.log(res.responseText);
-                const resultsDiv = document.getElementById("results");
-                resultsDiv.innerHTML = "";
-                const tableId = document.createElement("td");
-                const tableName = document.createElement("td");
-                const tableYear = document.createElement("td");
-                const tablePrice = document.createElement("td");
-                const tableColor = document.createElement("td");
-                const tableSize = document.createElement("td");
+                console.log(res.responseText);
+
+                const resultsTable = document.getElementById("resultsTable");
+                // Clear the existing table body
+                resultsTable.innerHTML = "";
 
                 const resText = JSON.parse(res.responseText);
-                
-                tableId.innerHTML = `${resText.id}`;
-                tableName.innerHTML = `${resText.name}`;
-                tableYear.innerHTML = `${resText.production_year}`;
-                tablePrice.innerHTML = `${resText.price}`;
-                tableColor.innerHTML = `${resText.color}`;
-                tableSize.innerHTML = `${resText.size}`;
-                resultsDiv.appendChild(tableId);
-                resultsDiv.appendChild(tableName);
-                resultsDiv.appendChild(tableYear);
-                resultsDiv.appendChild(tablePrice);
-                resultsDiv.appendChild(tableColor);
-                resultsDiv.appendChild(tableSize);
-                // const date = document.createElement("div");
-                // const resText = JSON.parse(res.responseText);
-                // const datetime = {date: resText.datetime.split("T")[0], time: resText.datetime.split("T")[1]};
-                // datetime.date = {day: datetime.date.split("-")[2], month: datetime.date.split("-")[1], year: datetime.date.split("-")[0]};
-                // datetime.time = {hour: datetime.time.split(":")[0], minute: datetime.time.split(":")[1]}
-                // date.innerHTML = `${datetime.date.day}/${datetime.date.month}/${datetime.date.year}`;
-                // resultsDiv.appendChild(date);
-                // const time = document.createElement("div");
-                // time.innerHTML = `${datetime.time.hour}:${datetime.time.minute}`
-                // resultsDiv.appendChild(time);
+
+                // Create a table row for the titles
+                const titleRow = document.createElement("tr");
+                const titleId = document.createElement("th");
+                const titleName = document.createElement("th");
+                const titleYear = document.createElement("th");
+                const titlePrice = document.createElement("th");
+                const titleColor = document.createElement("th");
+                const titleSize = document.createElement("th");
+
+                titleId.innerHTML = "ID";
+                titleName.innerHTML = "Name";
+                titleYear.innerHTML = "Production Year";
+                titlePrice.innerHTML = "Price";
+                titleColor.innerHTML = "Color";
+                titleSize.innerHTML = "Size";
+
+                titleRow.appendChild(titleId);
+                titleRow.appendChild(titleName);
+                titleRow.appendChild(titleYear);
+                titleRow.appendChild(titlePrice);
+                titleRow.appendChild(titleColor);
+                titleRow.appendChild(titleSize);
+
+                resultsTable.appendChild(titleRow);
+
+                // Process each item in the response
+                resText.forEach(item => {
+                    // Create a new table row for each item
+                    const row = document.createElement("tr");
+
+                    // Create a table data element for each property
+                    const tableId = document.createElement("td");
+                    const tableName = document.createElement("td");
+                    const tableYear = document.createElement("td");
+                    const tablePrice = document.createElement("td");
+                    const tableColor = document.createElement("td");
+                    const tableSize = document.createElement("td");
+
+                    // Set the inner HTML of each table data element to the corresponding property
+                    tableId.innerHTML = `${item.id}`;
+                    tableName.innerHTML = `${item.name}`;
+                    tableYear.innerHTML = `${item.production_year}`;
+                    tablePrice.innerHTML = `${item.price}`;
+                    tableColor.innerHTML = `${item.color}`;
+                    tableSize.innerHTML = `${item.size}`;
+
+                    // Append each table data element to the row
+                    row.appendChild(tableId);
+                    row.appendChild(tableName);
+                    row.appendChild(tableYear);
+                    row.appendChild(tablePrice);
+                    row.appendChild(tableColor);
+                    row.appendChild(tableSize);
+
+                    // Append the row to the table
+                    resultsTable.appendChild(row);
+                });
             }
         }
     };
     res.send();
+    getProduct.value = "";
+
+
     // END CODE HERE
 }
 
 productFormOnSubmit = (event) => {
     // BEGIN CODE HERE
-
+//      event.preventDefault();
+//
 //    // Get form values
-//    const name = document.getElementById("name");
-//    const production_year = document.getElementById("year");
-//    const price = document.getElementById("price");
-//    const color = document.getElementById("fcolor");
-//    const size = document.getElementById("size");
+//    const name = document.getElementById("name").value;
+//    const production_year = document.getElementById("year").value;
+//    const price = document.getElementById("price").value;
+//    const color = document.getElementById("fcolor").value;
+//    const size = document.getElementById("size").value;
 //
 //    const res = new XMLHttpRequest();
 //    res.open("POST", `http://127.0.0.1:5000/add-product`);
@@ -80,26 +113,23 @@ productFormOnSubmit = (event) => {
 //                alert(res.responseText);
 //
 //                // Clear form fields
-//                // name.innerHTML = "";
-//                // production_year.innerHTML = "";
-//                // price.innerHTML = "";
-//                // color.innerHTML = "";
-//                // size.innerHTML = "";
+//                document.getElementById("name").value = "";
+//                document.getElementById("year").value = "";
+//                document.getElementById("price").value = "";
+//                document.getElementById("fcolor").value = "";
+//                document.getElementById("size").value = "";
 //            }
 //        }
 //    };
 //
 //    res.setRequestHeader("Content-Type", "application/json");
 //    res.send(JSON.stringify({
-//        name: "Paper A8",
-//        production_year: "2006",
-//        price: "8",
-//        color: "4",
-//        size: "2"
-//    }))
-
-
-
+//        name: name,
+//        production_year: production_year,
+//        price: price,
+//        color: color,
+//        size: size
+//    }));
     event.preventDefault();
 
     // Get form values
@@ -114,7 +144,8 @@ productFormOnSubmit = (event) => {
     res.onreadystatechange = () => {
         if (res.readyState == 4) {
             if (res.status == 200) {
-                alert(res.responseText);
+                alert("ΟΚ"); // Add the alert here
+//                alert(res.responseText);
 
                 // Clear form fields
                 document.getElementById("name").value = "";
