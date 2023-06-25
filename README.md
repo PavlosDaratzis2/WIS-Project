@@ -1,2 +1,2 @@
 # WIS-Project
-Εργασια στο μαθημα WIS
+Project for the creation of a small website by beginners.
