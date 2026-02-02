@@ -27,6 +27,7 @@ Python, Flask, MongoDB, PyMongo, NumPy, Selenium, HTML/CSS/JavaScript
 ---
 
 ## Run locally
+```bash
 git clone https://github.com/PavlosDaratzis2/WIS-Project
 cd WIS-Project
 pip install -r requirements.txt
